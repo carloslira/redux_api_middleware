@@ -1,5 +1,5 @@
+import 'package:redux_api_middleware/src/fsa.dart';
 import 'package:redux_api_middleware/src/rsaa.dart';
-import 'package:redux_api_middleware/src/type_descriptor.dart';
 
 const validHTTPMethods = [
   'GET',
@@ -32,10 +32,6 @@ List<String> validateRSAA(RSAA rsaa) {
     errors.add('RSAA headers can only be a string or a function');
   }
 
-  if (rsaa.options != null && rsaa.options is! Map<String, String> && rsaa.options is! Function) {
-    errors.add('RSAA options can only be a string or a function');
-  }
-
   if (rsaa.credentials != null && !validCredentials.contains(rsaa.credentials))  {
     errors.add('Invalid RSAA credentials: ${rsaa.credentials}');
   }
@@ -51,15 +47,15 @@ List<String> validateRSAA(RSAA rsaa) {
     dynamic successType = rsaa.types[1];
     dynamic failureType = rsaa.types[2];
 
-    if (requestType is! String && requestType is! TypeDescriptor) {
+    if (requestType is! String && requestType is! FSA) {
       errors.add('Invalid request type');
     }
 
-    if (successType is! String && successType is! TypeDescriptor) {
+    if (successType is! String && successType is! FSA) {
       errors.add('Invalid success type');
     }
 
-    if (failureType is! String && failureType is! TypeDescriptor) {
+    if (failureType is! String && failureType is! FSA) {
       errors.add('Invalid failure type');
     }
   }

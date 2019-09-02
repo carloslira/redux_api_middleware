@@ -2,7 +2,6 @@ import 'package:meta/meta.dart';
 
 class RSAA {
   final dynamic endpoint;
-  final dynamic options;
   final String method;
   final dynamic body;
   final dynamic headers;
@@ -12,7 +11,6 @@ class RSAA {
 
   RSAA({
     @required this.endpoint,
-    this.options,
     @required this.method,
     this.body,
     this.headers,
