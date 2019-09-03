@@ -34,13 +34,17 @@ List<TypeDescriptor> normalizeTypeDescriptors(List<dynamic> types) {
   if (successType is String) {
     successType = TypeDescriptor(type: successType as String);
   }
-  successType.payload = (RSAA action, Store store, http.StreamedResponse response) => getJSON(response);
+  successType.payload =
+      (RSAA action, Store store, http.StreamedResponse response) =>
+          getJSON(response);
 
   if (failureType is String) {
     failureType = TypeDescriptor(type: failureType as String);
   }
-  failureType.payload = (RSAA action, Store store, http.StreamedResponse response) {
-    getJSON(response).then((dynamic jsonObj) => APIError(response.statusCode, response.reasonPhrase, jsonObj));
+  failureType.payload =
+      (RSAA action, Store store, http.StreamedResponse response) {
+    getJSON(response).then((dynamic jsonObj) =>
+        APIError(response.statusCode, response.reasonPhrase, jsonObj));
   };
 
   return [
@@ -50,7 +54,8 @@ List<TypeDescriptor> normalizeTypeDescriptors(List<dynamic> types) {
   ];
 }
 
-Future<FSA> prepareFSA(TypeDescriptor descriptor, [RSAA action, Store store, http.StreamedResponse response]) async {
+Future<FSA> prepareFSA(TypeDescriptor descriptor,
+    [RSAA action, Store store, http.StreamedResponse response]) async {
   FSA fsa = FSA(
     type: descriptor.type,
     payload: descriptor.payload,

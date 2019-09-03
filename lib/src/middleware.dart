@@ -15,7 +15,8 @@ void apiMiddleware<State>(
   NextDispatcher next,
 ) async {
   if (action is! RSAA) {
-    next(action); return;
+    next(action);
+    return;
   }
 
   RSAA rsaa = action as RSAA;
@@ -42,7 +43,8 @@ void apiMiddleware<State>(
 
   String body = await normalizeBody(store, rsaa, next, request);
   String endpoint = await normalizeEndpoint(store, rsaa, next, request);
-  Map<String, String> headers = await normalizeHeaders(store, rsaa, next, request);
+  Map<String, String> headers =
+      await normalizeHeaders(store, rsaa, next, request);
 
   if (request.payload is Function || request.meta is Function) {
     next(
@@ -50,7 +52,7 @@ void apiMiddleware<State>(
         request,
         rsaa,
         store,
-      ),      
+      ),
     );
   }
 
@@ -70,7 +72,8 @@ void apiMiddleware<State>(
 
     response = await client.send(request);
   } catch (e) {
-      await handleError(store, rsaa, next, request, RequestError(e.toString())); return;
+    await handleError(store, rsaa, next, request, RequestError(e.toString()));
+    return;
   }
 
   if (response.statusCode == 200) {
@@ -98,7 +101,8 @@ void apiMiddleware<State>(
   }
 }
 
-void handleInvalidRSAA(RSAA rsaa, NextDispatcher next, List<String> validationErrors) {
+void handleInvalidRSAA(
+    RSAA rsaa, NextDispatcher next, List<String> validationErrors) {
   String request = rsaa.types[0] as String;
 
   next(
@@ -110,30 +114,32 @@ void handleInvalidRSAA(RSAA rsaa, NextDispatcher next, List<String> validationEr
   );
 }
 
-Future<bool> shouldBailout(Store store, RSAA rsaa, NextDispatcher next, TypeDescriptor descriptor) async {
+Future<bool> shouldBailout(Store store, RSAA rsaa, NextDispatcher next,
+    TypeDescriptor descriptor) async {
   try {
     if (rsaa.bailout != null) {
-      if (
-        (rsaa.bailout is bool && rsaa.bailout as bool) || 
-        (rsaa.bailout is Function && rsaa.bailout(store) as bool)
-      ) {
+      if ((rsaa.bailout is bool && rsaa.bailout as bool) ||
+          (rsaa.bailout is Function && rsaa.bailout(store) as bool)) {
         return true;
       }
     }
-  } catch(e) {
-    await handleError(store, rsaa, next, descriptor, RequestError('RSAA bailout function failed'));
+  } catch (e) {
+    await handleError(store, rsaa, next, descriptor,
+        RequestError('RSAA bailout function failed'));
   }
 
   return false;
 }
 
-Future<String> normalizeEndpoint(Store store, RSAA rsaa, NextDispatcher next, TypeDescriptor descriptor) async {
+Future<String> normalizeEndpoint(Store store, RSAA rsaa, NextDispatcher next,
+    TypeDescriptor descriptor) async {
   String endpoint;
   if (rsaa.endpoint is Function) {
     try {
       endpoint = rsaa.endpoint(store) as String;
-    } catch(e) {
-      await handleError(store, rsaa, next, descriptor, RequestError('RSAA endpoint function failed'));
+    } catch (e) {
+      await handleError(store, rsaa, next, descriptor,
+          RequestError('RSAA endpoint function failed'));
     }
   } else {
     endpoint = rsaa.endpoint as String;
@@ -142,13 +148,15 @@ Future<String> normalizeEndpoint(Store store, RSAA rsaa, NextDispatcher next, Ty
   return endpoint;
 }
 
-Future<String> normalizeBody(Store store, RSAA rsaa, NextDispatcher next, TypeDescriptor descriptor) async {
+Future<String> normalizeBody(Store store, RSAA rsaa, NextDispatcher next,
+    TypeDescriptor descriptor) async {
   String body;
   if (rsaa.body is Function) {
     try {
       body = rsaa.body(store) as String;
-    } catch(e) {
-      await handleError(store, rsaa, next, descriptor, RequestError('RSAA body function failed'));
+    } catch (e) {
+      await handleError(store, rsaa, next, descriptor,
+          RequestError('RSAA body function failed'));
     }
   } else {
     body = rsaa.body as String;
@@ -157,13 +165,15 @@ Future<String> normalizeBody(Store store, RSAA rsaa, NextDispatcher next, TypeDe
   return body;
 }
 
-Future<Map<String, String>> normalizeHeaders(Store store, RSAA rsaa, NextDispatcher next, TypeDescriptor descriptor) async {
+Future<Map<String, String>> normalizeHeaders(Store store, RSAA rsaa,
+    NextDispatcher next, TypeDescriptor descriptor) async {
   Map<String, String> headers;
   if (rsaa.headers is Function) {
     try {
       headers = rsaa.headers(store) as Map<String, String>;
-    } catch(e) {
-      await handleError(store, rsaa, next, descriptor, RequestError('RSAA headers function failed'));
+    } catch (e) {
+      await handleError(store, rsaa, next, descriptor,
+          RequestError('RSAA headers function failed'));
     }
   } else {
     headers = rsaa.headers as Map<String, String>;
@@ -172,7 +182,8 @@ Future<Map<String, String>> normalizeHeaders(Store store, RSAA rsaa, NextDispatc
   return headers;
 }
 
-void handleError(Store store, RSAA rsaa, NextDispatcher next, TypeDescriptor descriptor, Error err) async {
+void handleError(Store store, RSAA rsaa, NextDispatcher next,
+    TypeDescriptor descriptor, Error err) async {
   descriptor.error = true;
   descriptor.payload = err;
 

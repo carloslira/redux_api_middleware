@@ -28,15 +28,20 @@ List<String> validateRSAA(RSAA rsaa) {
     errors.add('RSAA endpoint must be a string or a function');
   }
 
-  if (rsaa.headers != null && rsaa.headers is! Map<String, String> && rsaa.headers is! Function) {
+  if (rsaa.headers != null &&
+      rsaa.headers is! Map<String, String> &&
+      rsaa.headers is! Function) {
     errors.add('RSAA headers can only be a string or a function');
   }
 
-  if (rsaa.credentials != null && !validCredentials.contains(rsaa.credentials))  {
+  if (rsaa.credentials != null &&
+      !validCredentials.contains(rsaa.credentials)) {
     errors.add('Invalid RSAA credentials: ${rsaa.credentials}');
   }
 
-  if (rsaa.bailout != null && rsaa.bailout is! bool && rsaa.bailout is! Function) {
+  if (rsaa.bailout != null &&
+      rsaa.bailout is! bool &&
+      rsaa.bailout is! Function) {
     errors.add('RSAA bailout can only be a bool or a function');
   }
 
