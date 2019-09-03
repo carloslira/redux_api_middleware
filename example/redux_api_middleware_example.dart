@@ -35,6 +35,6 @@ void main() {
   );
 
   // Dispatch the action! The `apiMiddleware` will intercept and invoke
-  // the action function. It will go to the reduces as an FSA.
+  // the action function. It will go to the reducer as an FSA.
   store.dispatch(rsaa);
 }
