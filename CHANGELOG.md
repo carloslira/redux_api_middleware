@@ -1,4 +1,9 @@
-# Changelog 
+# Changelog
+
+## 0.1.2
+
+  * Improving analysis score.
+
 
 ## 0.1.0
 
