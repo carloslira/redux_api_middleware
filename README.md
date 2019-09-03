@@ -1,22 +1,36 @@
-A library for Dart developers.
+# redux_api_middleware
 
-Created from templates made available by Stagehand under a BSD-style
-[license](https://github.com/dart-lang/stagehand/blob/master/LICENSE).
+[Redux](https://pub.dartlang.org/packages/redux) middleware for calling APIs.
 
-## Usage
+The `apiMiddleware` intercepts and calls [*Redux Standard API-calling Actions*](#redux-standard-api-calling-actions) (RSAAs), and dispatches [*Flux Standard Actions*](#flux-standard-actions) (FSAs) to the next middleware.
 
-A simple usage example:
 
-```dart
-import 'package:redux_api_middleware/redux_api_middleware.dart';
+### Redux Standard API-calling Actions
 
-main() {
-  var awesome = new Awesome();
-}
-```
+The definition of a *Redux Standard API-calling Action* below is the one used to validate RSAA actions.
+  - actions that are not instances of `RSAA` will be passed to the next middleware without any modifications;
+  - actions that are instancesof `RSAA` that fail validation will result in an error *request* FSA.
 
-## Features and bugs
+A *Redux Standard API-calling Action* MUST
 
-Please file feature requests and bugs at the [issue tracker][tracker].
+- be a `RSAA` instance,
 
-[tracker]: http://example.com/issues/replaceme
+### Flux Standard Actions
+
+For convenience, we recall here the definition of a [*Flux Standard Action*](https://github.com/acdlite/flux-standard-action).
+
+An action MUST
+
+- be a `RSAA` instance,
+- have a `type` property.
+
+An action MAY
+
+- have an `error` property,
+- have a `payload` property,
+- have a `meta` property.
+
+
+## Credits
+
+This lib is [redux-api-middleware](https://github.com/agraboso/redux-api-middleware) library simply adapted to Dart.
