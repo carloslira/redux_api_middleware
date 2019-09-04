@@ -1,8 +1,8 @@
 import 'package:redux/redux.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:redux_api_middleware/src/fsa.dart';
 
+import 'package:redux_api_middleware/src/fsa.dart';
 import 'package:redux_api_middleware/src/rsaa.dart';
 import 'package:redux_api_middleware/src/utils.dart';
 import 'package:redux_api_middleware/src/errors.dart';

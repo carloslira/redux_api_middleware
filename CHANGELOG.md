@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.4
+
+  * Now the payload is a string, ww let the user parse this string.
+
 ## 0.1.3
 
   * http package user lower cased `content-type`. Fixing that.

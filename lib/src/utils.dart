@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:redux/redux.dart';
 
 import 'package:http/http.dart' as http;
@@ -8,15 +6,11 @@ import 'package:redux_api_middleware/src/rsaa.dart';
 import 'package:redux_api_middleware/src/errors.dart';
 import 'package:redux_api_middleware/src/type_descriptor.dart';
 
-Future<dynamic> getJSON(http.StreamedResponse response) async {
-  String contentType = response.headers['content-type'];
+Future getJSON(http.StreamedResponse response) async {
   const emptyCodes = [204, 205];
 
-  if (!emptyCodes.contains(response.statusCode) &&
-      (contentType != null && contentType.contains('json'))) {
-    return await response.stream.bytesToString().then<dynamic>((text) {
-      return json.encode(text);
-    });
+  if (!emptyCodes.contains(response.statusCode)) {
+    return await response.stream.bytesToString();
   }
 
   return null;
