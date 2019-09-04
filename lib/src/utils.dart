@@ -9,13 +9,13 @@ import 'package:redux_api_middleware/src/errors.dart';
 import 'package:redux_api_middleware/src/type_descriptor.dart';
 
 Future<dynamic> getJSON(http.StreamedResponse response) async {
-  String contentType = response.headers['Content-Type'];
+  String contentType = response.headers['content-type'];
   const emptyCodes = [204, 205];
 
   if (!emptyCodes.contains(response.statusCode) &&
       (contentType != null && contentType.contains('json'))) {
     return await response.stream.bytesToString().then<dynamic>((text) {
-      return json.decode(text);
+      return json.encode(text);
     });
   }
 

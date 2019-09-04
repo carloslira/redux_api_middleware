@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3
+
+  * http package user lower cased `content-type`. Fixing that.
+
 ## 0.1.2
 
   * Improving analysis score.
