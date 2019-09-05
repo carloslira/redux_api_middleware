@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.1.7
+
+  * Export the FSA for a more typed reducer.
+
+## 0.1.6
+
+  * Export the FSA for a more typed reducer.
+
+## 0.1.6
+
+  * Export the FSA for a more typed reducer.
+
+## 0.1.5
+
+  * The request action was not getting dispatched. Fixed that
+
 ## 0.1.4
 
   * Now the payload is a string, ww let the user parse this string.

@@ -54,6 +54,12 @@ void apiMiddleware<State>(
         store,
       ),
     );
+  } else {
+    next(
+      FSA(
+        type: request.type,
+      ),
+    );
   }
 
   http.StreamedResponse response;
