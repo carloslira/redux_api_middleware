@@ -27,7 +27,7 @@ class APIError extends Error {
   String statusText;
   dynamic response;
 
-  APIError(int status, String statusText, dynamic Response) {
+  APIError(int status, String statusText, dynamic response) {
     this.status = status;
     this.statusText = statusText;
     this.response = response;

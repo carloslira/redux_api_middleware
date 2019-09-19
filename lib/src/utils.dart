@@ -36,10 +36,9 @@ List<TypeDescriptor> normalizeTypeDescriptors(List<dynamic> types) {
     failureType = TypeDescriptor(type: failureType as String);
   }
   failureType.payload =
-      (RSAA action, Store store, http.StreamedResponse response) {
-    getJSON(response).then((dynamic jsonObj) =>
-        APIError(response.statusCode, response.reasonPhrase, jsonObj));
-  };
+      (RSAA action, Store store, http.StreamedResponse response) =>
+          getJSON(response).then((dynamic jsonObj) =>
+              APIError(response.statusCode, response.reasonPhrase, jsonObj));
 
   return [
     requestType as TypeDescriptor,

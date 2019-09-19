@@ -1,8 +1,14 @@
 # Changelog
 
-## 0.1.7
+## 0.1.9
 
-  * Export the FSA for a more typed reducer.
+  * The failure request payload wasn't being processed.
+  * Exported the errors for typed usage.
+
+## 0.1.8
+
+  * The wrong descriptor was being used in request error.
+  * Renaming the descriptor for more clarity.
 
 ## 0.1.6
 
