@@ -5,7 +5,7 @@ import 'package:redux_api_middleware/redux_api_middleware.dart';
 void main() {
   // First, create a quick reducer
   String reducer(String state, dynamic action) {
-    switch (action.type) {
+    switch (action['type']) {
       case 'request':
         return 'dispatched a request :)';
       case 'success':
@@ -24,17 +24,19 @@ void main() {
   );
 
   // Create a `RSAA`.
-  var rsaa = RSAA(
-    method: 'GET',
-    endpoint: 'http://url.com/api/test',
-    types: [
-      'request',
-      'success',
-      'failure',
-    ],
-  );
+  var action = {
+    RSAA: {
+      'method': 'GET',
+      'endpoint': 'http://url.com/api/test',
+      'types': [
+        'request',
+        'success',
+        'failure',
+      ],
+    },
+  };
 
   // Dispatch the action! The `apiMiddleware` will intercept and invoke
   // the action function. It will go to the reducer as an FSA.
-  store.dispatch(rsaa);
+  store.dispatch(action);
 }

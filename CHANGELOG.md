@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.1
+
+  * Update http dependency.
+  * Remove the RSAA and FSA definitions to become more malleable.
+
 ## 0.2.0
 
   * Update dependencies.
