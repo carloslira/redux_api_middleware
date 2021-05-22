@@ -1,13 +1,11 @@
-import 'package:meta/meta.dart';
-
 class TypeDescriptor {
   final String type;
   dynamic payload;
   dynamic meta;
-  bool error;
+  bool? error;
 
   TypeDescriptor({
-    @required this.type,
+    required this.type,
     this.payload,
     this.meta,
     this.error,
