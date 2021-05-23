@@ -22,15 +22,11 @@ class RequestError extends Error {
 
 class APIError extends Error {
   final String name = 'APIError';
-  String message;
-  int status;
-  String statusText;
-  dynamic response;
+  final String message;
+  final int status;
+  final String? statusText;
+  final dynamic response;
 
-  APIError(int status, String statusText, dynamic response) {
-    this.status = status;
-    this.statusText = statusText;
-    this.response = response;
-    this.message = '${status} - ${statusText}';
-  }
+  APIError(this.status, this.statusText, this.response)
+      : message = '$status - $statusText';
 }

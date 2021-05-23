@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:redux/redux.dart';
-
 import 'package:http/http.dart' as http;
 import 'package:redux_api_middleware/src/errors.dart';
 import 'package:redux_api_middleware/src/type_descriptor.dart';
@@ -51,9 +49,9 @@ List<TypeDescriptor> normalizeTypeDescriptors(List<dynamic> types) {
 }
 
 Future<Map<String, dynamic>> actionWith(TypeDescriptor descriptor,
-    [Map<String, dynamic> action,
+    [Map<String, dynamic>? action,
     dynamic state,
-    http.StreamedResponse response]) async {
+    http.StreamedResponse? response]) async {
   try {
     descriptor.payload = descriptor.payload is Function
         ? await descriptor.payload(action, state, response)

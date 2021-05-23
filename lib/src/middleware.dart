@@ -43,7 +43,6 @@ void apiMiddleware<State>(
   var headers = callAPI['headers'];
   var options = callAPI['options'];
   var method = callAPI['method'];
-  var credentials = callAPI['credentials'];
   var bailout = callAPI['bailout'];
   var types = callAPI['types'];
 
@@ -54,7 +53,8 @@ void apiMiddleware<State>(
   TypeDescriptor failureType = types[2];
 
   try {
-    if ((bailout is bool && bailout) || (bailout is Function && bailout(store.state))) {
+    if ((bailout is bool && bailout) ||
+        (bailout is Function && bailout(store.state))) {
       return;
     }
   } catch (e) {

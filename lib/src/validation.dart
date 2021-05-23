@@ -30,10 +30,7 @@ const validCredentials = [
 ];
 
 bool isMap(obj) {
-  return (
-    obj != null &&
-    obj.entries != null
-  );
+  return (obj != null && obj.entries != null);
 }
 
 bool isRSAA(action) {
@@ -70,7 +67,8 @@ List<String> validateRSAA(action) {
   List<String> errors = [];
 
   if (!isRSAA(action)) {
-    errors.add('RSAAs must be Map<String, dynamic> objects with an [RSAA] property');
+    errors.add(
+        'RSAAs must be Map<String, dynamic> objects with an [RSAA] property');
   }
 
   var callAPI = action[RSAA];
@@ -80,7 +78,7 @@ List<String> validateRSAA(action) {
 
   for (var key in callAPI.keys) {
     if (!validCallAPIKeys.contains(key)) {
-      errors.add('Invalid [RSAA] key: ${key}');
+      errors.add('Invalid [RSAA] key: $key');
     }
   }
 
@@ -109,18 +107,20 @@ List<String> validateRSAA(action) {
   }
 
   if (headers != null && !isMap(headers) && headers is! Function) {
-    errors.add('[RSAA].headers property must be a Map<String, dynamic> object, or a Function');
+    errors.add(
+        '[RSAA].headers property must be a Map<String, dynamic> object, or a Function');
   }
 
   if (options != null && !isMap(options) && options is! Function) {
-    errors.add('[RSAA].options property must be a Map<String, dynamic> object, or a Function');
+    errors.add(
+        '[RSAA].options property must be a Map<String, dynamic> object, or a Function');
   }
 
   if (credentials != null) {
     if (credentials is! String) {
       errors.add('[RSAA].credentials property must be a String');
     } else if (!validCredentials.contains(credentials)) {
-      errors.add('Invalid [RSAA].credentials: ${credentials}');
+      errors.add('Invalid [RSAA].credentials: $credentials');
     }
   }
 
