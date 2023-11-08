@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0
+
+  * Migrate to sound null-safety
+
 ## 0.2.1
 
   * Update http dependency.

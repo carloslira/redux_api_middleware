@@ -20,6 +20,7 @@ void main() {
   // Next, apply the `apiMiddleware` to the Store
   final store = Store<String>(
     reducer,
+    initialState: '',
     middleware: [apiMiddleware],
   );
 
